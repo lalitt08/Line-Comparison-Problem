@@ -14,10 +14,19 @@ class Line:
         return length
     
     def __eq__(self, other):
-        if isinstance(other, Line):
-            return (self.p1 == other.p1 and self.p2 == other.p2) or \
-                   (self.p1 == other.p2 and self.p2 == other.p1)
-        return False
+        return self.calculate_length() == other.calculate_length()
+
+    def __lt__(self, other):
+        return self.calculate_length() < other.calculate_length()
+
+    def __gt__(self, other):
+        return self.calculate_length() > other.calculate_length()
+
+    def shorter_or_equal(self, other):
+        return self.calculate_length() <= other.calculate_length()
+
+    def greater_or_equal(self, other):
+        return self.calculate_length() >= other.calculate_length()
     
 
 p1 = Point(1, 2) 
@@ -27,4 +36,9 @@ p4 = Point(4, 6)
 
 line1 = Line(p1, p2)
 line2 = Line(p3, p4)
-print("lines are equal",line1==line2)
+
+print("Line 1 length:", line1.calculate_length())
+print("Line 2 length:", line2.calculate_length())
+print("Is Line 1 equal to Line 2?", line1 == line2)
+print("Is Line 1 less than Line 2?", line1 < line2)
+print("Is Line 1 greater than Line 2?", line1 > line2)
